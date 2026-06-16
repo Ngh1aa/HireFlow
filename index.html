@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HireFlow - Recruitment & Candidate Management System</title>
+    <meta
+      name="description"
+      content="HireFlow is a static portfolio project for recruitment pipeline, candidate management, interview scheduling, and BA documentation."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <script
+      defer
+      src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"
+    ></script>
+    <script defer src="assets/js/app.js"></script>
+  </head>
+  <body>
+    <section class="login-screen is-hidden" id="loginScreen" aria-label="Login">
+      <div class="login-panel">
+        <div class="login-form-panel">
+          <a
+            class="brand brand-large"
+            href="#dashboard"
+            aria-label="HireFlow dashboard"
+          >
+            <span class="brand-mark" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+            <span>
+              <strong>HireFlow</strong>
+              <small>Recruitment OS</small>
+            </span>
+          </a>
+          <div class="login-copy">
+            <p class="eyebrow">Portfolio demo</p>
+            <h1>Recruitment work, organized from opening to offer.</h1>
+            <p>
+              A clean ATS-style workspace for HR Admins, Hiring Managers, and
+              Interviewers.
+            </p>
+          </div>
+          <form class="login-form" id="loginForm">
+            <label>
+              Email
+              <input type="email" value="hr.admin@hireflow.test" required />
+            </label>
+            <label>
+              Password
+              <input type="password" value="portfolio" required />
+            </label>
+            <div class="login-row">
+              <label class="checkbox-label">
+                <input type="checkbox" checked />
+                Remember me
+              </label>
+              <a href="#dashboard">Forgot password?</a>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit">
+              <i data-lucide="log-in"></i>
+              Login
+            </button>
+          </form>
+        </div>
+        <div class="login-visual-panel">
+          <img
+            src="assets/img/hireflow-login-visual.png"
+            alt="HireFlow recruiting dashboard illustration"
+          />
+        </div>
+      </div>
+    </section>
+
+    <div class="app-shell" id="appShell">
+      <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#dashboard" aria-label="HireFlow dashboard">
+          <span class="brand-mark" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span>
+            <strong>HireFlow</strong>
+            <small>Recruitment OS</small>
+          </span>
+        </a>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+          <button
+            class="nav-link"
+            data-view="jobs"
+            data-label="Jobs"
+            aria-label="Jobs"
+          >
+            <i data-lucide="gauge"></i>
+            <span>Jobs</span>
+          </button>
+          <button
+            class="nav-link"
+            data-view="candidates"
+            data-label="Candidates"
+            aria-label="Candidates"
+          >
+            <i data-lucide="circle-user-round"></i>
+            <span>Candidates</span>
+          </button>
+          <button
+            class="nav-link"
+            data-view="dashboard"
+            data-label="Home"
+            aria-label="Home"
+          >
+            <i data-lucide="pie-chart"></i>
+            <span>Home</span>
+          </button>
+          <button
+            class="nav-link"
+            data-view="interviews"
+            data-label="Interviews"
+            aria-label="Interviews"
+          >
+            <i data-lucide="calendar-days"></i>
+            <span>Interviews</span>
+          </button>
+          <button
+            class="nav-link"
+            data-view="pipeline"
+            data-label="Pipeline"
+            aria-label="Pipeline"
+          >
+            <i data-lucide="globe-2"></i>
+            <span>Pipeline</span>
+          </button>
+          <button
+            class="nav-link"
+            data-view="reports"
+            data-label="Reports"
+            aria-label="Reports"
+          >
+            <i data-lucide="message-square"></i>
+            <span>Reports</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="sidebar-orbit" aria-hidden="true">
+            <span></span>
+            <span></span>
+          </div>
+          <button class="sidebar-user" type="button" aria-label="Open profile">
+            <span class="sidebar-photo"></span>
+            <span class="notification-badge">6</span>
+          </button>
+          <div class="sidebar-utility">
+            <button class="icon-btn" type="button" aria-label="Sign out">
+              <i data-lucide="log-out"></i>
+            </button>
+            <button class="icon-btn" type="button" aria-label="More">
+              <i data-lucide="ellipsis"></i>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <div class="workspace">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button
+              class="icon-btn mobile-menu"
+              id="menuButton"
+              type="button"
+              aria-label="Open menu"
+            >
+              <i data-lucide="menu"></i>
+            </button>
+            <div>
+              <p class="eyebrow" id="pageEyebrow">Recruitment analytics</p>
+              <h1 id="pageTitle">Analytics</h1>
+            </div>
+          </div>
+          <div class="topbar-actions">
+            <button
+              class="company-selector"
+              type="button"
+              aria-label="Select company"
+            >
+              <span class="company-social">f</span>
+              <span>facebook.com/companyname</span>
+              <i data-lucide="chevron-down"></i>
+            </button>
+            <label class="search-box">
+              <i data-lucide="search"></i>
+              <input id="globalSearch" type="search" placeholder="Search" />
+            </label>
+            <button
+              class="btn btn-primary topbar-quick"
+              id="quickNewCandidate"
+              type="button"
+            >
+              New Company
+            </button>
+            <button
+              class="icon-btn ghost-action"
+              type="button"
+              aria-label="Fullscreen"
+            >
+              <i data-lucide="maximize-2"></i>
+            </button>
+            <button
+              class="icon-btn notification-action"
+              type="button"
+              aria-label="Notifications"
+            >
+              <i data-lucide="bell"></i>
+              <span class="notification-badge">6</span>
+            </button>
+            <button
+              class="btn topbar-quick visually-hidden-action"
+              id="quickScheduleInterview"
+              type="button"
+              aria-hidden="true"
+              tabindex="-1"
+            >
+              <i data-lucide="calendar-plus"></i>
+              Schedule Interview
+            </button>
+          </div>
+        </header>
+
+        <main class="page-content" id="pageContent" tabindex="-1"></main>
+      </div>
+    </div>
+
+    <div class="modal-backdrop is-hidden" id="modalRoot" aria-hidden="true">
+      <section
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <header class="modal-header">
+          <div>
+            <p class="eyebrow" id="modalEyebrow">HireFlow</p>
+            <h2 id="modalTitle">Modal</h2>
+          </div>
+          <button
+            class="icon-btn"
+            id="modalClose"
+            type="button"
+            aria-label="Close modal"
+          >
+            <i data-lucide="x"></i>
+          </button>
+        </header>
+        <div class="modal-body" id="modalBody"></div>
+      </section>
+    </div>
+
+    <div
+      class="command-overlay is-hidden"
+      id="commandOverlay"
+      aria-hidden="true"
+    >
+      <section
+        class="command-palette"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="commandTitle"
+      >
+        <header>
+          <i data-lucide="search"></i>
+          <input
+            id="commandInput"
+            type="search"
+            placeholder="Search candidates, roles, interviews..."
+          />
+          <button
+            class="icon-btn"
+            id="commandClose"
+            type="button"
+            aria-label="Close command search"
+          >
+            <i data-lucide="x"></i>
+          </button>
+        </header>
+        <div class="command-results" id="commandResults"></div>
+      </section>
+    </div>
+
+    <aside
+      class="candidate-drawer is-hidden"
+      id="candidateDrawer"
+      aria-hidden="true"
+    >
+      <button
+        class="drawer-scrim"
+        id="drawerScrim"
+        type="button"
+        aria-label="Close candidate drawer"
+      ></button>
+      <section class="drawer-panel" aria-label="Candidate quick detail">
+        <header class="drawer-header">
+          <div>
+            <p class="eyebrow">Candidate Quick View</p>
+            <h2 id="drawerTitle">Candidate</h2>
+          </div>
+          <button
+            class="icon-btn"
+            id="drawerClose"
+            type="button"
+            aria-label="Close candidate drawer"
+          >
+            <i data-lucide="x"></i>
+          </button>
+        </header>
+        <div class="drawer-body" id="drawerBody"></div>
+      </section>
+    </aside>
+
+    <div
+      class="toast is-hidden"
+      id="toast"
+      role="status"
+      aria-live="polite"
+    ></div>
+    <div class="dock-fade" aria-hidden="true"></div>
+  </body>
+</html>
