@@ -1,0 +1,44 @@
+/* HireFlow motion — candidate progression / stage confidence / recruiting workflow */
+:root{
+  --hire-motion-ease:cubic-bezier(.2,.85,.25,1);
+  --hire-fast:170ms;
+  --hire-med:340ms;
+  --hire-slow:620ms;
+}
+@keyframes hireflow-enter{from{opacity:0;transform:translate3d(0,16px,0)}to{opacity:1;transform:none}}
+@keyframes hireflow-stage-pulse{0%{box-shadow:0 0 0 0 rgba(88,80,236,.22)}100%{box-shadow:0 0 0 12px rgba(88,80,236,0)}}
+@keyframes hireflow-score-fill{from{transform:scaleX(.18);opacity:.45}to{transform:scaleX(1);opacity:1}}
+
+.app-shell,.dashboard-view,.login-panel{animation:hireflow-enter var(--hire-slow) var(--hire-motion-ease) both}
+.page-header>*{animation:hireflow-enter 460ms var(--hire-motion-ease) both}.page-header>*:nth-child(2){animation-delay:70ms}
+
+.nav-item,.btn,.candidate-card,.job-card,.metric-card,.stat-card,.interview-card,.kanban-card,.pipeline-card,.drawer,.modal,.score-card{
+  transition:transform var(--hire-fast) var(--hire-motion-ease),box-shadow var(--hire-med) var(--hire-motion-ease),border-color var(--hire-fast) ease,background-color var(--hire-fast) ease,opacity var(--hire-fast) ease;
+}
+.nav-item:hover{transform:translateX(3px)}
+.btn:active{transform:translateY(1px) scale(.985)}
+.metric-card:hover,.stat-card:hover{transform:translateY(-3px)}
+.candidate-card:hover,.kanban-card:hover,.pipeline-card:hover{transform:translateX(4px)}
+
+/* Recruiting stages should feel like handoffs through a process. */
+.kanban-column,.pipeline-stage,.stage-column{position:relative;overflow:hidden}
+.kanban-column::before,.pipeline-stage::before,.stage-column::before{content:"";position:absolute;top:0;left:12px;right:12px;height:2px;background:linear-gradient(90deg,transparent,currentColor,transparent);opacity:.14;transform:scaleX(.2);transform-origin:left center;transition:transform 520ms var(--hire-motion-ease)}
+.kanban-column:hover::before,.pipeline-stage:hover::before,.stage-column:hover::before{transform:scaleX(1)}
+.candidate-card.is-selected,.candidate-card.active,.kanban-card.is-selected,.kanban-card.active{animation:hireflow-stage-pulse 900ms ease-out 1}
+
+/* Score and fit indicators acknowledge evaluation instead of looping decoratively. */
+.score-bar>*,.match-bar>*,.progress-bar>*,.fit-meter>*{transform-origin:left center;animation:hireflow-score-fill 680ms var(--hire-motion-ease) both}
+.score-badge,.status-badge,.stage-badge,.tag{transition:transform var(--hire-fast) var(--hire-motion-ease),background-color var(--hire-fast) ease,color var(--hire-fast) ease}
+.score-badge:hover,.status-badge:hover,.stage-badge:hover,.tag:hover{transform:translateY(-1px)}
+
+.drawer.is-open,.drawer.open,.modal.is-open,.modal.show,.candidate-detail.is-open{animation:hireflow-enter 280ms var(--hire-motion-ease) both}
+input:focus,select:focus,textarea:focus{transition:border-color var(--hire-fast) ease,box-shadow var(--hire-fast) ease}
+
+@media (max-width:768px){
+  .app-shell,.dashboard-view,.login-panel{animation-duration:380ms}
+  .nav-item:hover,.metric-card:hover,.stat-card:hover,.candidate-card:hover,.kanban-card:hover,.pipeline-card:hover{transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .app-shell,.dashboard-view,.login-panel,.page-header>*,.score-bar>*,.match-bar>*,.progress-bar>*,.fit-meter>*{opacity:1!important;transform:none!important}
+}
